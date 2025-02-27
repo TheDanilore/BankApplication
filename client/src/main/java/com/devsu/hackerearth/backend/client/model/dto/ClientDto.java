@@ -18,11 +18,4 @@ public class ClientDto {
 	private String phone;
 	private boolean isActive;
 
-	public ClientDto(Long id, String dni, String name, boolean isActive) {
-		this.id = id;
-		this.dni = dni;
-		this.name = name;
-		this.isActive = isActive;
-	}
-
 }
