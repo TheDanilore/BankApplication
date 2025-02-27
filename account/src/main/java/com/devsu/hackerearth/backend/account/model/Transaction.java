@@ -21,6 +21,9 @@ public class Transaction extends Base {
 	@JoinColumn(name = "account_id", insertable = false, updatable = false)
 	private Account account;
 
+	public Transaction() {
+	}
+
 	public Transaction(Long id, Date date, String type, double amount, double balance, Long accountId) {
 		super(id);
 		this.date = date;

@@ -13,6 +13,9 @@ public class Account extends Base {
     @Column(name = "client_id")
     private Long clientId;
 
+    public Account() {
+    }
+
     public Account(Long id, String number, String type, double initialAmount, boolean isActive, Long clientId) {
         super(id);
         this.number = number;
