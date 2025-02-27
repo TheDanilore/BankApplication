@@ -49,8 +49,8 @@ public class AccountController {
 		return ResponseEntity.status(201).body(createdAccount);
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<AccountDto> update(@PathVariable Long id, @RequestBody AccountDto accountDto) {
+	@PutMapping
+	public ResponseEntity<AccountDto> update(@RequestBody AccountDto accountDto) {
 		// api/accounts/{id}
 		// Update accounts
 		AccountDto updatedAccount = accountService.update(accountDto);

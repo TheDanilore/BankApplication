@@ -49,8 +49,8 @@ public class ClientController {
 		return ResponseEntity.status(201).body(createdClient);
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<ClientDto> update(@PathVariable Long id, @RequestBody ClientDto clientDto) {
+	@PutMapping
+	public ResponseEntity<ClientDto> update(@RequestBody ClientDto clientDto) {
 		// api/clients/{id}
 		// Update client
 		ClientDto updatedClient = clientService.update(clientDto);
