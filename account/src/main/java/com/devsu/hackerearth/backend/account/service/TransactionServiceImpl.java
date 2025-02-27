@@ -5,18 +5,24 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
+
+import com.devsu.hackerearth.backend.account.model.Account;
 import com.devsu.hackerearth.backend.account.model.Transaction;
 import com.devsu.hackerearth.backend.account.model.dto.BankStatementDto;
 import com.devsu.hackerearth.backend.account.model.dto.TransactionDto;
+import com.devsu.hackerearth.backend.account.repository.AccountRepository;
 import com.devsu.hackerearth.backend.account.repository.TransactionRepository;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
         private final TransactionRepository transactionRepository;
+        private final AccountRepository accountRepository;
 
-        public TransactionServiceImpl(TransactionRepository transactionRepository) {
+        public TransactionServiceImpl(TransactionRepository transactionRepository,
+                        AccountRepository accountRepository) {
                 this.transactionRepository = transactionRepository;
+                this.accountRepository = accountRepository;
         }
 
         @Override
@@ -62,8 +68,16 @@ public class TransactionServiceImpl implements TransactionService {
                 List<Transaction> transactions = transactionRepository.findByAccountClientIdAndDateBetween(clientId,
                                 dateTransactionStart, dateTransactionEnd);
                 return transactions.stream().map(transaction -> {
+
+                        Account account = accountRepository.findById(transaction.getAccountId())
+                                        .orElseThrow(() -> new RuntimeException("Account not found"));
+
                         return new BankStatementDto(transaction.getDate(),
                                         clientId.toString(),
+                                        account.getNumber(),
+                                        account.getType(),
+                                        account.getInitialAmount(),
+                                        account.isActive(),
                                         transaction.getType(),
                                         transaction.getAmount(),
                                         transaction.getBalance());
