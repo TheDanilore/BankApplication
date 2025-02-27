@@ -3,8 +3,6 @@ package com.devsu.hackerearth.backend.account.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Transaction extends Base {
@@ -16,10 +14,6 @@ public class Transaction extends Base {
 
 	@Column(name = "account_id")
 	private Long accountId;
-
-	@ManyToOne
-	@JoinColumn(name = "account_id", insertable = false, updatable = false)
-	private Account account;
 
 	public Transaction() {
 	}
@@ -81,11 +75,4 @@ public class Transaction extends Base {
 		this.accountId = accountId;
 	}
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
 }

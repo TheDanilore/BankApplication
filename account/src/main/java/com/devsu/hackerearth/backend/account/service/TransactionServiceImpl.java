@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
-import com.devsu.hackerearth.backend.account.model.Account;
 import com.devsu.hackerearth.backend.account.model.Transaction;
 import com.devsu.hackerearth.backend.account.model.dto.BankStatementDto;
 import com.devsu.hackerearth.backend.account.model.dto.TransactionDto;
@@ -63,14 +62,8 @@ public class TransactionServiceImpl implements TransactionService {
                 List<Transaction> transactions = transactionRepository.findByAccountClientIdAndDateBetween(clientId,
                                 dateTransactionStart, dateTransactionEnd);
                 return transactions.stream().map(transaction -> {
-                        Account account = transaction.getAccount();
-
                         return new BankStatementDto(transaction.getDate(),
                                         clientId.toString(),
-                                        account.getNumber(),
-                                        account.getType(),
-                                        account.getInitialAmount(),
-                                        account.isActive(),
                                         transaction.getType(),
                                         transaction.getAmount(),
                                         transaction.getBalance());

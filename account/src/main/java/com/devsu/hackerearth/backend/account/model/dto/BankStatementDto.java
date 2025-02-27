@@ -20,4 +20,11 @@ public class BankStatementDto {
 	private String transactionType;
 	private double amount;
 	private double balance;
+	public BankStatementDto(Date date, String client, String transactionType, double amount, double balance) {
+		this.date = date;
+		this.client = client;
+		this.transactionType = transactionType;
+		this.amount = amount;
+		this.balance = balance;
+	}
 }
