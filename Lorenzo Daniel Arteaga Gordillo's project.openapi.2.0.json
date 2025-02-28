@@ -1,0 +1,226 @@
+{
+	"info": {
+		"title": "Lorenzo Daniel Arteaga Gordillo's project",
+		"description": "",
+		"version": "1.0.0"
+	},
+	"swagger": "2.0",
+	"paths": {
+		"http://0.0.0.0:8000/api/transactions": {
+			"get": {
+				"summary": "Get all",
+				"description": "",
+				"tags": [
+					"Samples/transactions"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {}
+								},
+								"example": ""
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {}
+								},
+								"example": ""
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"summary": "Create a new",
+				"description": "",
+				"tags": [
+					"Samples/transactions"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "",
+						"schema": {
+							"type": "object"
+						},
+						"type": "string",
+						"example": "{\n\t\"date\": \"2025-02-27\",\n\t\"type\": \"test\",\n\t\"amount\": 100,\n\t\"accountId\": 1\n}"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {}
+								},
+								"example": ""
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {}
+								},
+								"example": ""
+							}
+						}
+					}
+				}
+			}
+		},
+		"http://0.0.0.0:8000/api/transactions/{id}": {
+			"get": {
+				"summary": "Get info",
+				"description": "",
+				"tags": [
+					"Samples/transactions"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {}
+								},
+								"example": ""
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {}
+								},
+								"example": ""
+							}
+						}
+					}
+				}
+			}
+		},
+		"http://0.0.0.0:8000/api/transactions/clients/{clientId}/report": {
+			"get": {
+				"summary": "Get Report",
+				"description": "",
+				"tags": [
+					"Samples/transactions"
+				],
+				"parameters": [
+					{
+						"name": "dateTransactionStart",
+						"in": "query",
+						"description": "",
+						"required": true,
+						"example": "",
+						"type": "string"
+					},
+					{
+						"name": "dateTransactionEnd",
+						"in": "query",
+						"description": "",
+						"required": true,
+						"example": "",
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {}
+								},
+								"example": ""
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {}
+								},
+								"example": ""
+							}
+						}
+					}
+				}
+			}
+		},
+		"http://0.0.0.0:8000/api/transactions/last/{accountId}": {
+			"get": {
+				"summary": "Get Last",
+				"description": "",
+				"tags": [
+					"Samples/transactions"
+				],
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {}
+								},
+								"example": ""
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {}
+								},
+								"example": ""
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"tags": [
+		{
+			"name": "transactions",
+			"description": ""
+		},
+		{
+			"name": "Samples",
+			"description": ""
+		}
+	]
+}
