@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
+import com.devsu.hackerearth.backend.account.exception.InsufficientFundsException;
 import com.devsu.hackerearth.backend.account.model.Account;
 import com.devsu.hackerearth.backend.account.model.Transaction;
 import com.devsu.hackerearth.backend.account.model.dto.BankStatementDto;
@@ -57,7 +58,7 @@ public class TransactionServiceImpl implements TransactionService {
                 double newBalance = account.getInitialAmount();
 
                 if (newBalance < 0) {
-                        throw new RuntimeException("Saldo no disponible");
+                        throw new InsufficientFundsException("Saldo no disponible");
                 }
 
                 account.setInitialAmount(newBalance);
