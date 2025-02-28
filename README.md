@@ -1,6 +1,6 @@
 # BankApplication Microservices
 
-Este proyecto implementa una arquitectura de microservicios para una aplicación bancaria. Los microservicios incluyen `client` y `account`, cada uno responsable de manejar clientes y cuentas, respectivamente.
+Este proyecto implementa una arquitectura de microservicios para una aplicación bancaria. Los microservicios incluyen `client` y `account`, cada uno responsable de manejar clientes, cuentas y transacciones, respectivamente.
 
 ## Estructura del Proyecto
 
