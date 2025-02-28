@@ -33,7 +33,7 @@ Microservices/
 - `GET /api/clients`: Listar todos los clientes.
 
 ### 2. `account`
-**Descripción:** Maneja las operaciones CRUD para las cuentas.
+**Descripción:** Maneja las operaciones CRUD para las cuentas y transacciones.
 
 **Endpoints: account**
 - `POST /api/accounts`: Crear una cuenta.
