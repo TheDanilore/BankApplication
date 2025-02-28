@@ -51,8 +51,20 @@ public class TransactionServiceImpl implements TransactionService {
         @Override
         public TransactionDto create(TransactionDto transactionDto) {
                 // Create transaction
+                Account account = accountRepository.findById(transactionDto.getAccountId())
+                                .orElseThrow(() -> new RuntimeException("Account not found"));
+
+                double newBalance = account.getInitialAmount();
+
+                if (newBalance < 0) {
+                        throw new RuntimeException("Saldo no disponible");
+                }
+
+                account.setInitialAmount(newBalance);
+                accountRepository.save(account);
+
                 Transaction transaction = new Transaction(transactionDto.getId(), transactionDto.getDate(),
-                                transactionDto.getType(), transactionDto.getAmount(), transactionDto.getBalance(),
+                                transactionDto.getType(), transactionDto.getAmount(), newBalance,
                                 transactionDto.getAccountId());
 
                 Transaction savedTransaction = transactionRepository.save(transaction);
