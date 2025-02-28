@@ -84,12 +84,12 @@ public class TransactionServiceImpl implements TransactionService {
 
                 // convertir las transacciones a BankStatementDto
                 return transactions.stream().map(transaction -> {
-                        //Obtener la cuenta asociada usando el accountId
+                        // Obtener la cuenta asociada usando el accountId
                         Account account = accountRepository.findById(transaction.getAccountId())
                                         .orElseThrow(() -> new RuntimeException("Account not found"));
 
                         return new BankStatementDto(transaction.getDate(),
-                                        clientId.toString(), //clientId en lugar del nombre del cliente
+                                        clientId.toString(), // clientId en lugar del nombre del cliente
                                         account.getNumber(),
                                         account.getType(),
                                         account.getInitialAmount(),
@@ -104,16 +104,22 @@ public class TransactionServiceImpl implements TransactionService {
         @Override
         public TransactionDto getLastByAccountId(Long accountId) {
                 // If you need it
-                Optional<Transaction> transactionOptional = transactionRepository
+                List<Transaction> transactions = transactionRepository
                                 .findTopByAccountIdOrderByDateDesc(accountId);
-                return transactionOptional.map(transaction -> new TransactionDto(
-                                transaction.getId(),
-                                transaction.getDate(),
-                                transaction.getType(),
-                                transaction.getAmount(),
-                                transaction.getBalance(),
-                                transaction.getAccountId()))
-                                .orElse(null);
+
+                if (transactions.isEmpty()) {
+                        return null;
+                }
+
+                Transaction lastTransaction = transactions.get(0);
+
+                return new TransactionDto(
+                        lastTransaction.getId(),
+                        lastTransaction.getDate(),
+                        lastTransaction.getType(),
+                        lastTransaction.getAmount(),
+                        lastTransaction.getBalance(),
+                        lastTransaction.getAccountId());
         }
 
 }

@@ -2,7 +2,6 @@ package com.devsu.hackerearth.backend.account.repository;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,5 +16,5 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             @Param("dateTransactionStart") Date dateTransactionStart, @Param("dateTransactionEnd") Date dateTransactionEnd);
 
     @Query("SELECT t FROM Transaction t WHERE t.accountId = :accountId ORDER BY t.date DESC")
-    Optional<Transaction> findTopByAccountIdOrderByDateDesc(@Param("accountId") Long accountID);
+    List<Transaction> findTopByAccountIdOrderByDateDesc(@Param("accountId") Long accountID);
 }
