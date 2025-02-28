@@ -12,7 +12,7 @@ import com.devsu.hackerearth.backend.account.model.Transaction;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    @Query("SELECT t FROM Transaction t JOIN t.account a WHERE a.clientId = :clientId AND t.date BETWEEN :startDate AND :endDate")
+    @Query("SELECT t FROM Transaction t WHERE t.accountId IN (SELECT a.id FROM Account a WHERE a.clientId = :clientId) AND t.date BETWEEN :startDate AND :endDate")
     List<Transaction> findByAccountClientIdAndDateBetween(@Param("clientId") Long clientId,
             @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
