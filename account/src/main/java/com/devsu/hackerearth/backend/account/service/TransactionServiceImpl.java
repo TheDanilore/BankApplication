@@ -77,15 +77,18 @@ public class TransactionServiceImpl implements TransactionService {
         public List<BankStatementDto> getAllByAccountClientIdAndDateBetween(Long clientId, Date dateTransactionStart,
                         Date dateTransactionEnd) {
                 // Report
+                // Obtener todas las transacciones dentro del rango de fechas especificado
                 List<Transaction> transactions = transactionRepository.findByAccountClientIdAndDateBetween(clientId,
                                 dateTransactionStart, dateTransactionEnd);
-                return transactions.stream().map(transaction -> {
 
+                // convertir las transacciones a BankStatementDto
+                return transactions.stream().map(transaction -> {
+                        //Obtener la cuenta asociada usando el accountId
                         Account account = accountRepository.findById(transaction.getAccountId())
                                         .orElseThrow(() -> new RuntimeException("Account not found"));
 
                         return new BankStatementDto(transaction.getDate(),
-                                        clientId.toString(),
+                                        clientId.toString(), //clientId en lugar del nombre del cliente
                                         account.getNumber(),
                                         account.getType(),
                                         account.getInitialAmount(),
