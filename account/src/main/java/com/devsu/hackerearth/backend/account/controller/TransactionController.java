@@ -59,6 +59,7 @@ public class TransactionController {
 		// Get report
 		List<BankStatementDto> report = transactionService.getAllByAccountClientIdAndDateBetween(clientId,
 				dateTransactionStart, dateTransactionEnd);
+
 		if (!report.isEmpty()) {
 			return ResponseEntity.ok(report);
 		} else {

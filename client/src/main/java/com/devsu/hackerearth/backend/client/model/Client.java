@@ -7,7 +7,16 @@ public class Client extends Person {
 	private String password;
 	private boolean isActive;
 
-	public Client() {
+	public Client(){
+		
+	}
+
+	public Client(String name, String dni, String gender, int age, String address, String phone) {
+        super(name, dni, gender, age, address, phone);
+    }
+
+    public Client(Long id, String name, String dni, String gender, int age, String address, String phone) {
+		super(id, name, dni, gender, age, address, phone);
 	}
 
 	public Client(Long id, String name, String dni, String gender, int age, String address, String phone,

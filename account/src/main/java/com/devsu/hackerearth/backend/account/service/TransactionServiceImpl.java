@@ -55,7 +55,7 @@ public class TransactionServiceImpl implements TransactionService {
                 Account account = accountRepository.findById(transactionDto.getAccountId())
                                 .orElseThrow(() -> new RuntimeException("Account not found"));
 
-                double newBalance = account.getInitialAmount();
+                double newBalance = account.getInitialAmount() + transactionDto.getAmount();
 
                 if (newBalance < 0) {
                         throw new InsufficientFundsException("Saldo no disponible");
@@ -69,6 +69,7 @@ public class TransactionServiceImpl implements TransactionService {
                                 transactionDto.getAccountId());
 
                 Transaction savedTransaction = transactionRepository.save(transaction);
+
                 return new TransactionDto(savedTransaction.getId(), savedTransaction.getDate(),
                                 savedTransaction.getType(), savedTransaction.getAmount(), savedTransaction.getBalance(),
                                 savedTransaction.getAccountId());
@@ -78,19 +79,20 @@ public class TransactionServiceImpl implements TransactionService {
         public List<BankStatementDto> getAllByAccountClientIdAndDateBetween(Long clientId, Date dateTransactionStart,
                         Date dateTransactionEnd) {
                 // Report
-                // Obtener todas las transacciones dentro del rango de fechas especificado
+                // Obtenemos todas las transacciones dentro de un rango de fechas especificado
                 List<Transaction> transactions = transactionRepository.findByAccountClientIdAndDateBetween(clientId,
                                 dateTransactionStart, dateTransactionEnd);
 
-                // convertir las transacciones a BankStatementDto
+                // Convertir las transacciones a BankStatementDto
                 return transactions.stream().map(transaction -> {
+
                         // Obtener la cuenta asociada usando el accountId
                         Account account = accountRepository.findById(transaction.getAccountId())
                                         .orElseThrow(() -> new RuntimeException("Account not found"));
 
                         return new BankStatementDto(transaction.getDate(),
-                                        clientId.toString(), // clientId en lugar del nombre del cliente
-                                        account.getNumber(),
+                                        clientId.toString(),
+                                        account.getNumber(), // clientId en lugar del nombre del cliente
                                         account.getType(),
                                         account.getInitialAmount(),
                                         account.isActive(),
@@ -114,12 +116,12 @@ public class TransactionServiceImpl implements TransactionService {
                 Transaction lastTransaction = transactions.get(0);
 
                 return new TransactionDto(
-                        lastTransaction.getId(),
-                        lastTransaction.getDate(),
-                        lastTransaction.getType(),
-                        lastTransaction.getAmount(),
-                        lastTransaction.getBalance(),
-                        lastTransaction.getAccountId());
+                                lastTransaction.getId(),
+                                lastTransaction.getDate(),
+                                lastTransaction.getType(),
+                                lastTransaction.getAmount(),
+                                lastTransaction.getBalance(),
+                                lastTransaction.getAccountId());
         }
 
 }

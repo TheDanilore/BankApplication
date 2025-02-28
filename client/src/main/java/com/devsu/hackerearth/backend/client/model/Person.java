@@ -11,7 +11,8 @@ public class Person extends Base {
 	private String address;
 	private String phone;
 
-	public Person() {
+	public Person(){
+		
 	}
 
 	public Person(Long id, String name, String dni, String gender, int age, String address, String phone) {

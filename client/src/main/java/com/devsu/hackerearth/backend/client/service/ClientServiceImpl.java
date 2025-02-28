@@ -34,7 +34,7 @@ public class ClientServiceImpl implements ClientService {
 		Optional<Client> clientOptional = clientRepository.findById(id);
 		return clientOptional
 				.map(client -> new ClientDto(client.getId(), client.getDni(), client.getName(), client.getPassword(),
-				client.getGender(), client.getAge(), client.getAddress(), client.getPhone(), client.isActive()))
+						client.getGender(), client.getAge(), client.getAddress(), client.getPhone(), client.isActive()))
 				.orElse(null);
 	}
 

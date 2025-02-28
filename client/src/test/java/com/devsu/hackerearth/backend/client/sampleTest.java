@@ -2,7 +2,6 @@ package com.devsu.hackerearth.backend.client;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -15,18 +14,34 @@ import com.devsu.hackerearth.backend.client.service.ClientService;
 @SpringBootTest
 public class sampleTest {
 
-	private ClientService clientService = mock(ClientService.class);
-	private ClientController clientController = new ClientController(clientService);
+    private ClientService clientService = mock(ClientService.class);
+    private ClientController clientController = new ClientController(clientService);
 
     @Test
     void createClientTest() {
         // Arrange
         ClientDto newClient = new ClientDto(1L, "Dni", "Name", "Password", "Gender", 1, "Address", "9999999999", true);
-        ClientDto createdClient = new ClientDto(1L, "Dni", "Name", "Password", "Gender", 1, "Address", "9999999999", true);
+        ClientDto createdClient = new ClientDto(1L, "Dni", "Name", "Password", "Gender", 1, "Address", "9999999999",
+                true);
         when(clientService.create(newClient)).thenReturn(createdClient);
 
         // Act
         ResponseEntity<ClientDto> response = clientController.create(newClient);
+
+        // Assert
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(createdClient, response.getBody());
+    }
+
+    @Test
+    public void testCreateClient() {
+        ClientDto clientDto = new ClientDto(5L, "12345678", "Test 1", "password123", "Masculino", 30, "test 123",
+                "987654321", true);
+        ClientDto createdClient = clientService.create(clientDto);
+        when(clientService.create(clientDto)).thenReturn(createdClient);
+
+        // Act
+        ResponseEntity<ClientDto> response = clientController.create(clientDto);
 
         // Assert
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
