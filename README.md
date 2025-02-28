@@ -43,11 +43,11 @@ Microservices/
 - `GET /api/accounts`: Listar todas las cuentas.
 
 **Endpoints: transaction**
-- `POST /api/transactions`: Crear una transaccion.
-- `GET /api/transactions/{id}`: Obtener una transaccion por ID.
+- `POST /api/transactions`: Crear una transacción.
+- `GET /api/transactions/{id}`: Obtener una transacción por ID.
 - `GET /api/transactions/clients/{clientId}/report`: Generar un reporte de "Estado de cuenta" especificando un rango de fechas y cliente.
 - `GET /api/transactions/last/{accountId}`: Obtener la última transacción para un accountId específico.
-- `GET /api/transactions`: Listar todas las cuentas.
+- `GET /api/transactions`: Listar todas las transacción.
 
 ## Funcionalidades del API
 
